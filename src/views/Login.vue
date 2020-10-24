@@ -29,7 +29,7 @@
             <i class="iconfont icon-dunpaisuo"></i>
             <input class="password" type="password" placeholder="密码" />
           </div>
-          <div class="sliding"> 滑块</div>
+          <!-- <div class="sliding"> 滑块</div> -->
           <div class="login_btn">登录</div>
           <div class="find_password">找回密码</div>
         </div>

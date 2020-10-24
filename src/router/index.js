@@ -30,7 +30,7 @@ const routes = [
     path: '/signin',
     name: 'Signin',
 
-    // component: () => import('../views/Signin.vue'),
+    component: () => import('../views/Signin.vue'),
     //     children: [   
     //       {
     //           path: '/photo',   
