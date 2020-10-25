@@ -17,7 +17,7 @@
         <div class="tab_content1" v-show="num==1">
           <div class="mail_box">
             <i class="iconfont icon-yonghu"></i>
-            <input class="mail" type="text" placeholder="手机号、邮箱" />
+            <input class="mail" type="text" v-model="phone"  placeholder="手机号、邮箱" />
             <div class="country_num">
                 <span class="country_num1"></span>
                 <span class="country_num2">+86</span>
@@ -27,10 +27,10 @@
 
           <div class="password_box">
             <i class="iconfont icon-dunpaisuo"></i>
-            <input class="password" type="password" placeholder="密码" />
+            <input class="password" type="password" v-model="password" placeholder="密码" />
           </div>
           <!-- <div class="sliding"> 滑块</div> -->
-          <div class="login_btn">登录</div>
+          <div class="login_btn" @click="login1">登录</div>
           <div class="find_password">找回密码</div>
         </div>
 
@@ -45,14 +45,14 @@
             </div>
           </div>
 
-          <div class="sliding"> 滑块</div>
+          <!-- <div class="sliding"> 滑块</div> -->
 
           <div class="password_box">
             <i class="iconfont icon-dunpaisuo"></i>
             <input class="password" type="text" placeholder="动态验证码" />
             <div class="hq_box">获取验证码</div>
           </div>
-          <div class="login_btn">登录</div>
+          <div class="login_btn" @click="login2">登录</div>
            <div class="find_password"></div>
         </div>
 
@@ -79,7 +79,9 @@
 export default {
     data(){
         return{
-            num:1
+            num:1,
+            phone:'',
+            password:'',
         }
     },
     methods:{
@@ -88,6 +90,30 @@ export default {
         },
         fn2(){
             this.num=2
+        },
+        login1(){
+
+          var obj={
+
+          }
+          let cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            obj[cookies[i].split("=")[0]]=cookies[i].split("=")[1]
+          }
+          // console.log(obj);
+          if(this.phone!=obj.phone&&this.password!=obj.password){
+            console.log("请输入正确的账号和密码");
+            
+          }else{
+            console.log("成功");
+            this.$router.push({path: '/'})
+          }
+
+          
+          
+        },
+        login2(){
+
         }
     }
 }

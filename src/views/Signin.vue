@@ -122,10 +122,10 @@ export default {
           const code=this.code
           document.cookie="phone="+phone+";expires="+date1
           document.cookie="code="+code+";expires="+date1
+          this.$router.push({path: '/signin/photo', query: {photo: this.phone}})
+
           this.phone=''
           this.code=''
-
-          this.$router.push({path: '/signin/photo', query: {id: 1234}})
         }
         
       },

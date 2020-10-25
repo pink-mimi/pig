@@ -31,13 +31,19 @@ const routes = [
     name: 'Signin',
 
     component: () => import('../views/Signin.vue'),
-    //     children: [   
-    //       {
-    //           path: '/photo',   
-    //           component:  Photo
-    //       },
+      //   children: [   
+      //     {
+      //         path: '/phone',   
+      //         component: () => import('../views/Phone.vue'),
+      //     },
         
-    //   ]
+      // ]
+  },
+  {
+    path: '/signin/phone',
+    name: 'Phone',
+
+    component: () => import('../views/Phone.vue')
   },
   {
     path: '/city',
