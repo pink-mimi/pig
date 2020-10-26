@@ -44,7 +44,7 @@
           <router-link to="/city">
             <div class="index_landBox1 index_location">
                 <span class="iconfont icon--_fangzi index_location_tubiao"></span>
-                <span class="index_location_text1">&nbsp;&nbsp;北京</span>
+                <span class="index_location_text1">&nbsp;&nbsp;{{city}}</span>
               <span class="iconfont icon-dingwei1 index_location_text2">我的位置</span>
             </div>
           </router-link>
@@ -158,20 +158,26 @@
 
     <!-- 更多房源 -->
     <div class="index_moreBox">
-      <router-link to="result">
+      <router-link :to="{path:'/result',query: {times: this.times,city:this.city}}">
+       
+
         <div class="index_moreBox_text">更多北京优质房源</div>
       </router-link>
     </div>
 
+
     <!-- 底部盒子 -->
-    <div class="index_bottom_record">
-      <span>关于小猪</span>
-      <span>客服电话：400-010-7890</span>
-      <span>营业执照号103613118</span>
-      <span>许可证号：京ICP证140510号</span>
-      <span>京ICP证12035936号-1</span>
-      <span>京公安网安备11010802020380号</span>
-    </div>
+    
+      <van-skeleton   :row="4" :loading="loading">
+          <div class="index_bottom_record">
+              <span>关于小猪</span>
+              <span>客服电话：400-010-7890</span>
+              <span>营业执照号103613118</span>
+              <span>许可证号：京ICP证140510号</span>
+              <span>京ICP证12035936号-1</span>
+              <span>京公安网安备11010802020380号</span>
+          </div>
+      </van-skeleton>
 
 
         <!-- 底部定位 -->
@@ -209,7 +215,9 @@ export default {
       arrs:[],
       num:2,
       times:[],/////选取月份和日
-      weeks:[]
+      weeks:[],
+      loading: true,
+      city:"北京"
     };
   },
   name: "Index",
@@ -249,17 +257,33 @@ export default {
         // console.log(yue,ri);
         this.times.push(yue)
         this.times.push(ri)
-        console.log(this.times);
+        // console.log(this.times);
       }else{
         this.times=this.$route.query.data
-        console.log(this.$route.query.day);
+        // console.log(this.$route.query.day);
          this.weeks=[]
          this.weeks.push(this.$route.query.day[0]==0?"星期日":this.$route.query.day[0]==1?"星期一":this.$route.query.day[0]==2?"星期二":this.$route.query.day[0]==3?"星期三":this.$route.query.day[0]==4?"星期四":this.$route.query.day[0]==5?"星期五":"星期六")
         this.weeks.push((this.$route.query.day[1])==0?"星期日":(this.$route.query.day[1])==1?"星期一":(this.$route.query.day[1])==2?"星期二":(this.$route.query.day[1])==3?"星期三":(this.$route.query.day[1])==4?"星期四":(this.$route.query.day[1])==5?"星期五":"星期六")
       }
 
+        if(this.$route.query.city!=undefined){
+            this.city=this.$route.query.city
+        }else{
+          // console.log(111);
+        }
+     
+
     },200)
+
+
+    setTimeout(()=>{
+    this.loading = false;
+    },3000)
+
+  //  console.log(this.times);
   },
+
+
 
 };
 

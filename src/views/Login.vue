@@ -37,7 +37,7 @@
         <div class="tab_content2" v-show="num==2">
          <div class="mail_box">
             <i class="iconfont icon-yonghu"></i>
-            <input class="mail" type="text" placeholder="手机号" />
+            <input class="mail" type="number" v-model.trim="phone2"  placeholder="手机号" />
             <div class="country_num">
                 <span class="country_num1"></span>
                 <span class="country_num2">+86</span>
@@ -49,7 +49,7 @@
 
           <div class="password_box">
             <i class="iconfont icon-dunpaisuo"></i>
-            <input class="password" type="text" placeholder="动态验证码" />
+            <input class="password" type="text" v-model="verification" placeholder="动态验证码" />
             <div class="hq_box">获取验证码</div>
           </div>
           <div class="login_btn" @click="login2">登录</div>
@@ -71,7 +71,19 @@
               </router-link>
           </div>
       </div>
+
+
     </div>
+    
+    <div class="popout">
+      <div class="popout1" v-if="show1"> 
+          请输入正确的账号和密码
+      </div>
+      <div class="popout2" v-if="show2"> 
+          请输入正确的手机号和验证码
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -82,6 +94,10 @@ export default {
             num:1,
             phone:'',
             password:'',
+            phone2:'',
+            show1:false,
+            show2:false,
+            verification:''
         }
     },
     methods:{
@@ -103,17 +119,28 @@ export default {
           // console.log(obj);
           if(this.phone!=obj.phone&&this.password!=obj.password){
             console.log("请输入正确的账号和密码");
-            
+            this.show1=true
+            this.show2=false
+            setTimeout(()=>{
+              this.show1=false
+            },3000)
           }else{
             console.log("成功");
             this.$router.push({path: '/'})
           }
-
-          
           
         },
         login2(){
-
+          
+         if(this.phone2.match(/^1[3|4|5|7|8][0-9]{9}$/)&&this.verification==123456){
+            this.$router.push({path: '/'})
+         }else{
+            this.show2=true
+            this.show1=false
+            setTimeout(()=>{
+              this.show2=false
+            },3000)
+         }
         }
     }
 }
@@ -272,4 +299,23 @@ export default {
     height: 0.72rem;
     width: 0.72rem;
 }
+
+
+/* 弹框 */
+.popout{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%);
+}
+.popout1,.popout2{
+  font-size: 0.28rem;
+  color: white;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 0.1rem;
+}
+
+
 </style>

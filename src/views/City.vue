@@ -12,26 +12,8 @@
 
       <div class="float_top_famous">
           <ul class="float_top_famous_list">
-              <li class="float_top_famous_item">
-                  迪士尼乐园
-              </li>
-               <li class="float_top_famous_item">
-                  南锣鼓巷
-              </li>
-               <li class="float_top_famous_item">
-                  银座
-              </li>
-               <li class="float_top_famous_item">
-                  心斋桥
-              </li>
-               <li class="float_top_famous_item">
-                  祇园
-              </li>
-               <li class="float_top_famous_item">
-                  宽窄巷子
-              </li>
-               <li class="float_top_famous_item">
-                  西湖
+              <li class="float_top_famous_item" v-for="(arr,index) in arrs" :key="index" @click="huoqu(arr)">
+                {{arr}}
               </li>
           </ul>
       </div>
@@ -53,121 +35,80 @@
         热门城市
         </div>
         <div class="float_bottom_hotcity_tubiao">
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-wodefujin"></i>
-            <p class="float_bottom_hotcity_item_desc">我的附近</p>
+          <div class="float_bottom_hotcity_item" v-for="(list,index) in lists" :key="index" @click="huoqu(list.name)">
+            <i class="iconfont" :class="list.icon"></i>
+            <p class="float_bottom_hotcity_item_desc">{{list.name}}</p>
           </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-beijingbeikao"></i>
-            <p class="float_bottom_hotcity_item_desc">北京</p>
-          </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-qiyerendingbeifen"></i>
-            <p class="float_bottom_hotcity_item_desc">上海</p>
-          </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-city_chengdu"></i>
-            <p class="float_bottom_hotcity_item_desc">成都</p>
-          </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-guangzhou"></i>
-            <p class="float_bottom_hotcity_item_desc">广州</p>
-          </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-shenzhen1"></i>
-            <p class="float_bottom_hotcity_item_desc">深圳</p>
-          </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-xianggang"></i>
-            <p class="float_bottom_hotcity_item_desc">香港</p>
-          </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-city_sanya"></i>
-            <p class="float_bottom_hotcity_item_desc">三亚</p>
-          </div>
-
-          <div class="float_bottom_hotcity_item">
-            <i class="iconfont icon-city_zhongqing"></i>
-            <p class="float_bottom_hotcity_item_desc">重庆</p>
-          </div>
-          
         </div>
 
         <div class="float_bottom_hotcity_list">
     
-          <van-index-bar :index-list="indexList">
-            <van-index-anchor index="A">A</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[0].name" :key="index" />
+          <van-index-bar :index-list="indexList"   :sticky-offset-top=190>
+            <van-index-anchor index="A"  >A</van-index-anchor>
+              <van-cell v-bind:title="city"  @click="huoqu(city)" v-for="(city,index) in citys[0].name" :key="index" />
 
             <van-index-anchor index="B">B</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[1].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[1].name" :key="index" />
 
             <van-index-anchor index="C">C</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[2].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[2].name" :key="index" />
 
             <van-index-anchor index="D">D</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[3].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[3].name" :key="index" />
 
             <van-index-anchor index="E">E</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[4].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[4].name" :key="index" />
 
             <van-index-anchor index="F">F</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[5].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[5].name" :key="index" />
 
             <van-index-anchor index="G">G</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[6].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[6].name" :key="index" />
 
             <van-index-anchor index="H">H</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[7].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[7].name" :key="index" />
 
             <van-index-anchor index="J">J</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[8].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[8].name" :key="index" />
 
             <van-index-anchor index="K">K</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[9].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[9].name" :key="index" />
 
             <van-index-anchor index="L">L</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[10].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[10].name" :key="index" />
 
             <van-index-anchor index="M">M</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[11].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[11].name" :key="index" />
 
             <van-index-anchor index="N">N</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[12].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[12].name" :key="index" />
 
             <van-index-anchor index="P">P</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[13].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[13].name" :key="index" />
 
             <van-index-anchor index="Q">Q</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[14].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[14].name" :key="index" />
 
             <van-index-anchor index="R">R</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[15].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[15].name" :key="index" />
 
             <van-index-anchor index="S">S</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[16].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[16].name" :key="index" />
 
             <van-index-anchor index="T">T</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[17].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[17].name" :key="index" />
 
             <van-index-anchor index="W">W</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[18].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[18].name" :key="index" />
 
             <van-index-anchor index="X">X</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[19].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[19].name" :key="index" />
 
             <van-index-anchor index="Y">Y</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[20].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[20].name" :key="index" />
 
             <van-index-anchor index="Z">Z</van-index-anchor>
-              <van-cell v-bind:title="city" v-for="(city,index) in citys[21].name" :key="index" />
+              <van-cell v-bind:title="city" @click="huoqu(city)" v-for="(city,index) in citys[21].name" :key="index" />
 
           </van-index-bar>
         </div>
@@ -340,7 +281,46 @@ export default {
         
       ],
       num:1,
-      indexList:['A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','W','X','Y','Z']
+      indexList:['A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','W','X','Y','Z'],
+      arrs:["迪士尼乐园",'南锣鼓巷','银座','心斋桥','祇园','宽窄巷子','西湖','塔佩门','广州长隆','四面佛'],
+      lists:[
+        {
+          icon:"icon-wodefujin",
+          name:"我的附近"
+        },
+         {
+          icon:"icon-beijingbeikao",
+          name:"北京"
+        },
+         {
+          icon:"icon-qiyerendingbeifen",
+          name:"上海"
+        },
+         {
+          icon:"icon-city_chengdu",
+          name:"成都"
+        },
+         {
+          icon:"icon-guangzhou",
+          name:"广州"
+        },
+         {
+          icon:"icon-shenzhen1",
+          name:"深圳"
+        },
+         {
+          icon:"icon-xianggang",
+          name:"香港"
+        },
+         {
+          icon:"icon-city_sanya",
+          name:"三亚"
+        },
+         {
+          icon:"icon-city_zhongqing",
+          name:"重庆"
+        }
+      ]
    
     };
   },
@@ -352,6 +332,10 @@ export default {
     qiehuan(e){
       // console.log(e);
       this.num=e
+    },
+    huoqu(name){
+      console.log(name);
+      this.$router.push({path: '/', query: {city:name}})
     }
   },
 };

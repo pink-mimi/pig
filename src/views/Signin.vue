@@ -13,7 +13,7 @@
         <div class="tab_content1">
           <div class="mail_box">
             <i class="iconfont icon-shoujihao"></i>
-            <input class="mail" type="text" v-model="phone" placeholder="手机号" />
+            <input class="mail" type="number" v-model.trim="phone" placeholder="手机号" />
             <div class="country_num">
                 <span class="country_num1"></span>
                 <span class="country_num2">+86</span>
@@ -94,21 +94,20 @@ export default {
     },
     methods:{
       register(){
-        console.log(this.phone);
-        console.log(this.code);
+        // console.log(this.phone);
+        // console.log(this.code);
         
         // console.log(this.phone == ''||!this.phone.match(/^(?!(\s+$))/));
-
-
         if(this.num==true&&(this.phone == ''||!this.phone.match(/^(?!(\s+$))/))){ ///手机号是否为空
            this.show1=true
+           this.show2=false
              setTimeout(()=>{
               this.show1=false
             },3000)
 
         }else if(this.num!=true){  ///////判断是否勾选同意协议
             this.show2=true
-            
+           this.show1=false
             setTimeout(()=>{
               this.show2=false
             },3000)

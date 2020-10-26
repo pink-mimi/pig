@@ -4,7 +4,7 @@
     <div class="result_top">
       <div class="header">
         <i class="iconfont icon-arrow-left result_return" @click="Return"></i>
-        <span class="header_title">北京</span>
+        <span class="header_title">{{city}}</span>
         <i class="iconfont icon-caidan result_menu"  @click="show"></i>
       </div>
       <div class="result_top_search">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="result_top_calendar_box">
-          <span class="result_top_calendar_box_text">10.28 - 10.29</span>
+          <span class="result_top_calendar_box_text">{{times[0]}} - {{times[1]}}</span>
           <i class="iconfont icon-sanjiao"></i>
         </div>
       </div>
@@ -43,6 +43,8 @@
     <!-- 中间房型数据 -->
     <div class="result_content">
       <div class="result_content_list">
+
+
         <div class="result_content_item" v-for="(arr,index) in arrs" :key="index">
           <router-link :to="'/detail?id='+arr.id">
             <div class="result_content_item_top">
@@ -80,6 +82,7 @@
             </div>
           </router-link>
         </div>
+
       </div>
     </div>
 
@@ -96,6 +99,7 @@ export default {
     components:{
         Warp,
         Menu,
+  
     },
     data() {
         return {
@@ -111,7 +115,10 @@ export default {
               oldprice: "",
               photo: ""
             }
-          ]
+          ],
+          times:[],
+          city:""
+
         };
     },
     name: "Result",
@@ -124,7 +131,8 @@ export default {
       },
       Return(){
       this.$router.go(-1)
-      }
+      },
+
     },
     mounted(){
       this.axios.get('http://localhost:3000/result').then(res=>{
@@ -132,11 +140,18 @@ export default {
       this.arrs=[]
       this.arrs=this.arrs.concat(res.data.data)
 
-        console.log(this.arrs);
+        // console.log(this.arrs);
       }).catch(err=>{
         console.log(err);
       })
+
+      this.times=[]
+      this.times.push(this.$route.query.times[0])
+      this.times.push(this.$route.query.times[1])
+      this.city=this.$route.query.city
     }
+
+
 };
 </script>
 
